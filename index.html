@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Rod's Mood Board</title>
+<meta name="description" content="Design references Rod loves: layouts, colors, type and feel, collected and kept current.">
+<style>
+  :root {
+    --bg: #1c1c1e;
+    --wave-1: #0d2340;
+    --wave-2: #163a63;
+    --wave-3: #1f4f80;
+    --card: rgba(56, 56, 61, 0.6);
+    --card-head: rgba(72, 72, 78, 0.55);
+    --card-body: rgba(0, 0, 0, 0.45);
+    --line: rgba(255, 255, 255, 0.08);
+    --text: rgba(255, 255, 255, 0.98);
+    --muted: rgba(235, 235, 245, 0.6);
+    --accent: #0a84ff;
+    --shadow: 17px 20px 40px rgba(0, 0, 0, 0.65);
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    min-height: 100vh;
+    background:
+      radial-gradient(120% 80% at 10% 10%, var(--wave-2) 0%, transparent 55%),
+      radial-gradient(90% 70% at 90% 40%, var(--wave-3) 0%, transparent 50%),
+      linear-gradient(160deg, var(--wave-1) 0%, var(--bg) 70%);
+    background-attachment: fixed;
+    color: var(--text);
+    font: 15px/1.4 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "Helvetica Neue", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  header.bar {
+    position: sticky; top: 0; z-index: 5;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px max(16px, env(safe-area-inset-right, 0px)) 10px max(16px, env(safe-area-inset-left, 0px));
+    background: rgba(28, 28, 30, 0.72);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid var(--line);
+  }
+  header.bar h1 { margin: 0; font-size: 17px; font-weight: 600; letter-spacing: -0.01em; }
+  header.bar .count { color: var(--muted); font-size: 13px; }
+  main {
+    max-width: 1080px; margin: 0 auto;
+    padding: 32px max(16px, env(safe-area-inset-right, 0px)) 64px max(16px, env(safe-area-inset-left, 0px));
+  }
+  .intro {
+    background: var(--card); border-radius: 22px; box-shadow: var(--shadow);
+    padding: 18px 22px; margin-bottom: 28px; display: flex; gap: 16px; align-items: center;
+  }
+  .intro p { margin: 0; color: var(--muted); }
+  .intro strong { color: var(--text); display: block; font-size: 16px; margin-bottom: 2px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; }
+  .card {
+    background: var(--card); border-radius: 22px; box-shadow: var(--shadow);
+    overflow: hidden; display: flex; flex-direction: column; min-width: 0;
+  }
+  .card .head {
+    display: flex; align-items: center; gap: 12px; padding: 14px 18px;
+    background: var(--card-head); border-bottom: 1px solid var(--line);
+  }
+  .icon {
+    width: 36px; height: 36px; border-radius: 9px; flex: none;
+    display: grid; place-items: center; font-size: 18px; color: #fff;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.25);
+  }
+  .head h2 { margin: 0; font-size: 18px; font-weight: 600; letter-spacing: -0.01em; }
+  .head .sub { font-size: 12px; color: var(--muted); }
+  .body { padding: 14px 18px 18px; background: var(--card-body); flex: 1; display: grid; gap: 12px; }
+  .body p { margin: 0; color: var(--muted); }
+  .swatches { display: flex; gap: 8px; flex-wrap: wrap; }
+  .sw { display: grid; gap: 4px; justify-items: center; font-size: 10px; color: var(--muted); font-family: ui-monospace, Menlo, monospace; }
+  .sw i { width: 34px; height: 34px; border-radius: 10px; border: 1px solid var(--line); display: block; }
+  .tags { display: flex; gap: 6px; flex-wrap: wrap; }
+  .tag { font-size: 11px; padding: 3px 9px; border-radius: 999px; background: rgba(255,255,255,0.08); color: var(--muted); }
+  .row { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--line); padding-top: 10px; font-size: 12px; color: var(--muted); }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  footer { text-align: center; color: var(--muted); font-size: 12px; margin-top: 40px; }
+</style>
+</head>
+<body>
+<header class="bar">
+  <h1>Mood Board</h1>
+  <span class="count" id="count"></span>
+</header>
+<main>
+  <section class="intro">
+    <div class="icon" style="background:linear-gradient(135deg,#0a84ff,#5e5ce6)">✦</div>
+    <div>
+      <strong>Things I love the look of</strong>
+      <p>Layouts, colors, type and feel worth stealing from. Each card says what's good about it.</p>
+    </div>
+  </section>
+  <section class="grid" id="grid"></section>
+  <footer>Kept up to date by Rod and his agents. Add a card in <code>boards.js</code>.</footer>
+</main>
+<script src="boards.js"></script>
+<script>
+  const grid = document.getElementById('grid');
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  (window.BOARDS || []).forEach(b => {
+    const el = document.createElement('article');
+    el.className = 'card';
+    el.innerHTML = `
+      <div class="head">
+        <div class="icon" style="background:${esc(b.iconBg)}">${esc(b.icon)}</div>
+        <div><h2>${esc(b.title)}</h2><div class="sub">${esc(b.kind)}</div></div>
+      </div>
+      <div class="body">
+        <p>${esc(b.why)}</p>
+        <div class="swatches">${(b.colors||[]).map(c => `<span class="sw"><i style="background:${esc(c)}"></i>${esc(c)}</span>`).join('')}</div>
+        <div class="tags">${(b.tags||[]).map(t => `<span class="tag">${esc(t)}</span>`).join('')}</div>
+        <div class="row"><span>Added ${esc(b.added)}</span>${b.url ? `<a href="${esc(b.url)}" target="_blank" rel="noopener">Visit ↗</a>` : ''}</div>
+      </div>`;
+    grid.appendChild(el);
+  });
+  document.getElementById('count').textContent = `${(window.BOARDS||[]).length} references`;
+</script>
+</body>
+</html>
