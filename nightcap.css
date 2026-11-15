@@ -1,0 +1,67 @@
+/* Nightcap: our theme (Rod, 2026-11-14).
+   Dark glass cards floating on a deep-blue night sky. Inspired by iCloud web; no Apple assets.
+   Use: <link rel="stylesheet" href="https://rodmjay.github.io/moodboard/nightcap.css">
+   Then: body.nc, header.nc-bar, .nc-grid, .nc-card > .nc-head + .nc-body, .nc-icon, .nc-tag, .nc-btn */
+:root {
+  --nc-bg: #1c1c1e;
+  --nc-sky-1: #0d2340;
+  --nc-sky-2: #163a63;
+  --nc-sky-3: #1f4f80;
+  --nc-card: rgba(56, 56, 61, 0.6);
+  --nc-card-head: rgba(72, 72, 78, 0.55);
+  --nc-card-body: rgba(0, 0, 0, 0.45);
+  --nc-line: rgba(255, 255, 255, 0.08);
+  --nc-text: rgba(255, 255, 255, 0.98);
+  --nc-muted: rgba(235, 235, 245, 0.6);
+  --nc-blue: #0a84ff;
+  --nc-orange: #ff9f0a;
+  --nc-green: #30d158;
+  --nc-red: #ff453a;
+  --nc-purple: #bf5af2;
+  --nc-radius: 22px;
+  --nc-radius-sm: 12px;
+  --nc-shadow: 17px 20px 40px rgba(0, 0, 0, 0.65);
+  --nc-font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "Helvetica Neue", Arial, sans-serif;
+  --nc-mono: ui-monospace, "SF Mono", Menlo, monospace;
+  color-scheme: dark;
+}
+body.nc {
+  margin: 0; min-height: 100vh; color: var(--nc-text);
+  background:
+    radial-gradient(120% 80% at 10% 10%, var(--nc-sky-2) 0%, transparent 55%),
+    radial-gradient(90% 70% at 90% 40%, var(--nc-sky-3) 0%, transparent 50%),
+    linear-gradient(160deg, var(--nc-sky-1) 0%, var(--nc-bg) 70%);
+  background-attachment: fixed;
+  font: 15px/1.4 var(--nc-font);
+  -webkit-font-smoothing: antialiased;
+}
+.nc *, .nc *::before, .nc *::after { box-sizing: border-box; }
+.nc a { color: var(--nc-blue); text-decoration: none; }
+.nc a:hover { text-decoration: underline; }
+.nc-bar {
+  position: sticky; top: 0; z-index: 10;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 10px max(16px, env(safe-area-inset-right, 0px)) 10px max(16px, env(safe-area-inset-left, 0px));
+  background: rgba(28, 28, 30, 0.72);
+  backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid var(--nc-line);
+}
+.nc-bar h1 { margin: 0; font-size: 17px; font-weight: 600; letter-spacing: -0.01em; }
+.nc-main { max-width: 1080px; margin: 0 auto; padding: 32px max(16px, env(safe-area-inset-right, 0px)) 64px max(16px, env(safe-area-inset-left, 0px)); }
+.nc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; }
+.nc-card { background: var(--nc-card); border-radius: var(--nc-radius); box-shadow: var(--nc-shadow); overflow: hidden; display: flex; flex-direction: column; min-width: 0; }
+.nc-head { display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: var(--nc-card-head); border-bottom: 1px solid var(--nc-line); }
+.nc-head h2 { margin: 0; font-size: 18px; font-weight: 600; letter-spacing: -0.01em; }
+.nc-sub { font-size: 12px; color: var(--nc-muted); }
+.nc-body { padding: 14px 18px 18px; background: var(--nc-card-body); flex: 1; display: grid; gap: 12px; align-content: start; }
+.nc-muted { color: var(--nc-muted); }
+.nc-icon { width: 36px; height: 36px; border-radius: 9px; flex: none; display: grid; place-items: center; font-size: 18px; color: #fff; box-shadow: inset 0 1px 0 rgba(255,255,255,0.25); background: linear-gradient(135deg, #5ac8fa, var(--nc-blue)); }
+.nc-tag { display: inline-block; font-size: 11px; padding: 3px 9px; border-radius: 999px; background: rgba(255,255,255,0.08); color: var(--nc-muted); }
+.nc-btn { display: inline-flex; align-items: center; gap: 6px; border: 0; border-radius: 999px; padding: 7px 14px; font: 600 13px var(--nc-font); color: #fff; background: var(--nc-blue); cursor: pointer; }
+.nc-btn.ghost { background: rgba(255,255,255,0.1); }
+.nc-list { list-style: none; margin: 0; padding: 0; }
+.nc-list li { padding: 10px 0; border-bottom: 1px solid var(--nc-line); }
+.nc-list li:last-child { border-bottom: 0; }
+.nc table { width: 100%; border-collapse: collapse; }
+.nc th, .nc td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--nc-line); }
+.nc th { color: var(--nc-muted); font-weight: 500; font-size: 12px; }
